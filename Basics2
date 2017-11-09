@@ -1,0 +1,3 @@
+phy = int(input("Please enter Physics mark:"))
+chem = int(input("Please enter Chemistry mark:"))
+maths = int(input("Please enter Maths mark:"))
