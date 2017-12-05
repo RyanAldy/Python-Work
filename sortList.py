@@ -1,5 +1,6 @@
 class sortList:
 
+# Asterix means takes unlimited parameters
     def sort_the_list(self, *):
         a = int(input("Enter number: "))
         while a != 0:

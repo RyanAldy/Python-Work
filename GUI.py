@@ -2,7 +2,7 @@
 
 from Tkinter import *
 
-class application:
+class Application(Frame):
 
     def __init__(self, main_frame):
 
@@ -31,5 +31,4 @@ class application:
 root = tk()
 
 app = application(root)
-
 root.mainloop()

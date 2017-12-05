@@ -12,7 +12,7 @@ upper_char_start = ord('A')
 lower_char_start = ord('a')
 #lower_char_end = ord('z')
 
-# char is now a variable of each item in text/input sentence
+# char is now a variable of each item in text/input sentence (essentially an array)
 for char in text:
     if char.isupper():
         upper_char_counter[ord(char) - upper_char_start] += 1
@@ -24,17 +24,3 @@ for i in range(26):
         print(chr(upper_char_start + i), ": ", upper_char_counter[i])
     if lower_char_counter[i] > 0:
         print(chr(lower_char_start + i), ": ", lower_char_counter[i])
-
-
-
-#        if temp_letter_num = upper_char_start:
-#            upper_char_counter[0] += 1
-#        upper_char_start += 1
-#    elif char >= lower_char_start and char <= lower_char_end:
-#        temp_letter_num = ord(text[char])
-#        if temp_letter_num = lower_char_start:
-#            lower_char_counter[0] += 1
-#        lower_char_start += 1
-
-#print(char, ":" lower_char_counter[])
-#print(char, ":" upper_char_counter[])

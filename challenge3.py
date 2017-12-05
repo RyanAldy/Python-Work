@@ -14,4 +14,5 @@ for char in range(len(sentence)):
     else:
         word_buffer = word_buffer + sub_word
 
+# To print last word
 print(word_buffer)
