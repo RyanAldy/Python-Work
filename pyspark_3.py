@@ -9,7 +9,7 @@ def records(rec):
 c = SparkConf()
 sc = SparkContext(conf = c)
 
-RDD = sc.textfile("sales.csv")
+RDD = sc.textfile("/Ryan_spark/SALES.csv")
 First = RDD.first()
 
 RDD2 = RDD.filter(lambda x: x <> First)
