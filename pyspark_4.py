@@ -5,9 +5,9 @@ def sum_revenue (x, y):
     return (x + y)
 
 def records(rec):
-    column6 = float(rec[5])
+    column6 = rec[5]
     column7 = float(rec[6])
-    return (column6 * column7)
+    return (column6 , column7)
 
 def split_string(a):
     Data = a.split(",")
@@ -22,7 +22,7 @@ RDD2 = RDD.filter(lambda x: x <> First)
 RDD3 = RDD2.map(split_string)
 RDD4 = RDD3.filter(lambda x: x[8] != '')
 RDD5 = RDD4.map(records)
-
+# Map returns another RDD
 # Basically groups the values by key (Whatever this is in the dataset)
 DATA1 = RDD5.countByKey()
 # Groups it by country as that's what I returned as the first value into RDD5
