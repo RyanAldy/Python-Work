@@ -13,6 +13,10 @@ def split_users_string(a):
     Data = a.split("|")
     return Data
 
+def split_moviedata_string(a):
+    Data = a.split("\t")
+    return Data
+
 def convert_movie_fields(rec):
     return (int(rec[0]), rec[1], rec[2])
 
@@ -30,8 +34,9 @@ moviesRDD = sc.textFile("/Ryan_spark/moviesnew.csv")
 moviesRDD2 = moviesRDD.map(split_string)
 moviesRDD3 = moviesRDD2.map(convert_movie_fields)
 
-ratingsRDD = sc.textFile("/Ryan_spark/ratings.csv")
-ratingsRDD2 = ratingsRDD.map(split_string)
+# movie.data is an amended version of ratings.csv
+ratingsRDD = sc.textFile("/Ryan_spark/movie.data")
+ratingsRDD2 = ratingsRDD.map(split_moviedata_string)
 ratingsRDD3 = ratingsRDD2.map(convert_ratings_fields)
 
 usersRDD = sc.textFile("/Ryan_spark/u.user")
@@ -58,5 +63,13 @@ idcount.registerTempTable("femaletab")
 max_count = sqlC.sql("select movieid, sum(ratingcount) as ratingsum from femaletab group by movieid")
 max_count.registerTempTable("MaxCountTab")
 movie_name = sqlC.sql("select a.title, a.movieid, b.ratingsum from MovieData a, MaxCountTab b where a.movieid = b.movieid")
-max_row = movie_name.rdd.max(lambda row: row.ratingsum)
-print max_row.title
+movie_name.registerTempTable("NewMaxCountTab")
+maxnum = sqlC.sql("select max(ratingsum) as maxratingsum from NewMaxCountTab")
+# Use .first to get the row
+toprating = maxnum.first().maxratingsum
+# Use .format to use variable in SQL query
+topmovie = sqlC.sql("select title from NewMaxCountTab where ratingsum = {0}".format(toprating)).show()
+
+# Previous code
+#max_row = movie_name.rdd.max(lambda row: row.ratingsum)
+#print max_row.title
